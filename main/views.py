@@ -36,7 +36,7 @@ def login(request):
 		user = authenticate(request, username=username, password=password)
 
 		if user is not None:
-			login(request, user)
+			login(request)
 			return redirect('/')
 		else:
 			messages.info(request, 'Incorrect username or password. Try again.')	
@@ -49,7 +49,6 @@ def signup(request):
 		form = CreateUserForm(request.POST)
 		if form.is_valid():
 			form.save()
-			user = form.cleaned_data('username')
 			print('Your Account has Successfully been Created.')
 			messages.success(request, 'Your Account has Successfully been Created.')
 		return redirect('/login')
